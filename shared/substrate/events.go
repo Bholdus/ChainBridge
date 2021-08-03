@@ -5,7 +5,7 @@ package utils
 
 import (
 	events "github.com/ChainSafe/chainbridge-substrate-events"
-	"github.com/centrifuge/go-substrate-rpc-client/types"
+	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
 )
 
 type EventErc721Minted struct {
@@ -162,10 +162,38 @@ type EventRegistryRegistryCreated struct {
 	Topics     []types.Hash
 }
 
+type OptionElectionCompute struct {
+	types.OptionBytes
+}
+
 // EventRegistryTmp is emitted only for testing
 type EventRegistryTmp struct {
 	Phase  types.Phase
 	Hash   types.Hash
+	Topics []types.Hash
+}
+
+// Election Event
+type EventElectionSignedPhaseStarted struct {
+	Phase types.Phase
+	Index types.U32
+	Topics []types.Hash
+}
+
+type EventElectionUnsignedPhaseStarted struct {
+	Phase types.Phase
+	Index types.U32
+	Topics []types.Hash
+}
+
+type EventElectionElectionFinalized struct {
+	Phase types.Phase
+	Compute OptionElectionCompute
+	Topics []types.Hash
+}
+
+type EventStakingStakingElection struct {
+	Phase types.Phase
 	Topics []types.Hash
 }
 
@@ -199,4 +227,10 @@ type Events struct {
 	Registry_Mint                    []EventRegistryMint                   //nolint:stylecheck,golint
 	Registry_RegistryCreated         []EventRegistryRegistryCreated        //nolint:stylecheck,golint
 	Registry_RegistryTmp             []EventRegistryTmp                    //nolint:stylecheck,golint
+
+	ElectionProviderMultiPhase_SignedPhaseStarted	[]EventElectionSignedPhaseStarted
+	ElectionProviderMultiPhase_UnsignedPhaseStarted	[]EventElectionUnsignedPhaseStarted
+	ElectionProviderMultiPhase_ElectionFinalized []EventElectionElectionFinalized
+
+	Staking_StakingElection []EventStakingStakingElection
 }
