@@ -91,6 +91,10 @@ test-sub:
 	@echo "  >  \033[32mRunning substrate tests...\033[0m "
 	go test ./chains/substrate
 
+test-bholdus:
+	@echo "  >  \033[32mRunning substrate tests...\033[0m "
+	go test ./chains/bholdus
+
 docker-start:
 	./scripts/docker/start-docker.sh
 

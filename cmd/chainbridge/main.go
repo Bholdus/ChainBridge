@@ -15,6 +15,7 @@ import (
 
 	"strconv"
 
+	"github.com/ChainSafe/ChainBridge/chains/bholdus"
 	"github.com/ChainSafe/ChainBridge/chains/ethereum"
 	"github.com/ChainSafe/ChainBridge/chains/substrate"
 	"github.com/ChainSafe/ChainBridge/config"
@@ -199,6 +200,8 @@ func run(ctx *cli.Context) error {
 			newChain, err = ethereum.InitializeChain(chainConfig, logger, sysErr, m)
 		} else if chain.Type == "substrate" {
 			newChain, err = substrate.InitializeChain(chainConfig, logger, sysErr, m)
+		} else if chain.Type == "bholdus" {
+			newChain, err = bholdus.InitializeChain(chainConfig, logger, sysErr, m)
 		} else {
 			return errors.New("unrecognized Chain Type")
 		}
